@@ -1,3 +1,78 @@
-.profile-dropdown {
-  position: absolute;
+.navigation-container {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 100vh;
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+}
+
+.navigation-container .sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.navigation-container .sidebar-title {
+  color: white;
+  margin-bottom: 45px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.navigation-container nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.navigation-container nav ul li {
+  margin: 25px 0;
+}
+
+.navigation-container nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.navigation-container nav ul li a:hover {
+  color: #f39c12;
+}
+
+.navigation-container nav ul li a svg {
+  margin-right: 10px;
+}
+
+.navigation-container .username-logout-container {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navigation-container .username-logout-container .username {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.navigation-container .logout-button {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.navigation-container .logout-button:hover {
+  background-color: #c0392b;
+}
+
+.navigation-container .logout-button:focus {
+  outline: none;
 }

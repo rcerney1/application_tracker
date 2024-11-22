@@ -1,23 +1,24 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
-import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
+import HomePage from '../components/HomePage';
+import KanbanBoard from '../components/KanbanBoard';
 
 export const router = createBrowserRouter([
   {
-    element: <Layout />,
+    path: "/login",
+    element: <LoginFormPage />, // LoginFormPage route outside of Layout
+  },
+  {
+    element: <Layout />, 
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element: <HomePage/>,
       },
       {
-        path: "login",
-        element: <LoginFormPage />,
-      },
-      {
-        path: "signup",
-        element: <SignupFormPage />,
+        path: "/myjobtracker", 
+        element: <KanbanBoard/>,
       },
     ],
   },

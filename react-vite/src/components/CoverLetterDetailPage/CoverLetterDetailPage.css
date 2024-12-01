@@ -1,0 +1,54 @@
+.cover-letter-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+  
+.cover-letter-detail-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+  
+.image-container {
+    margin-bottom: 20px;
+}
+  
+.cover-letter-image {
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+  
+.metadata {
+    text-align: left;
+    margin-top: 20px;
+}
+  
+.metadata p {
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
+.actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    
+}
+
+.actions button{
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
+.actions button:hover{
+    background-color: #656565;
+    color: white;
+}
+  

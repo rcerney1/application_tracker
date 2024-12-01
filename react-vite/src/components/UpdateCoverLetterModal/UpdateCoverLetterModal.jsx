@@ -10,20 +10,25 @@ function UpdateCoverLetterModal({ coverLetterId }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
-    const coverLetter = useSelector((state) =>
-        state.coverLetters.coverLetters.find((c) => c.id === coverLetterId)
-    );
+    // Fetch cover letter from Redux state
+    const coverLetter = useSelector((state) => state.coverLetters.coverLetter);
     const applications = useSelector((state) => state.applications.applications);
 
-    const [title, setTitle] = useState(coverLetter?.title || "");
-    const [applicationId, setApplicationId] = useState(coverLetter?.application_id || "");
-    const [fileUrl, setFileUrl] = useState(coverLetter?.image?.file_url || "");
+    const [title, setTitle] = useState("");
+    const [applicationId, setApplicationId] = useState("");
+    const [fileUrl, setFileUrl] = useState("");
     const [errors, setErrors] = useState({});
 
+    // Initialize form fields when the modal is opened
     useEffect(() => {
-        if (!coverLetter) {
+        if (coverLetter) {
+            setTitle(coverLetter.title || "");
+            setApplicationId(coverLetter.application_id || "");
+            setFileUrl(coverLetter.image?.file_url || "");
+        } else {
             dispatch(thunkFetchCoverLetterByID(coverLetterId));
         }
+
         dispatch(thunkFetchApplications());
     }, [dispatch, coverLetter, coverLetterId]);
 
@@ -31,7 +36,6 @@ function UpdateCoverLetterModal({ coverLetterId }) {
         e.preventDefault();
 
         const validationErrors = {};
-
         if (!title) validationErrors.title = "Title is required.";
         if (!fileUrl) validationErrors.fileUrl = "Image URL is required.";
 
@@ -40,21 +44,17 @@ function UpdateCoverLetterModal({ coverLetterId }) {
             return;
         }
 
-        const updatedData = {
-            title,
-            application_id: applicationId || null,
-        };
+        const updatedData = { title, application_id: applicationId || null };
 
         try {
             await dispatch(thunkUpdateCoverLetter(coverLetterId, updatedData));
-
             if (fileUrl) {
                 const imagePayload = { file_url: fileUrl };
                 await dispatch(thunkUpdateCoverLetterImage(coverLetterId, imagePayload));
             }
 
             closeModal();
-            window.location.reload();
+            window.location.reload(); // Reload the page to reflect changes
         } catch (error) {
             console.error("Failed to update cover letter or image:", error);
         }

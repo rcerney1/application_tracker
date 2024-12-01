@@ -1,10 +1,10 @@
 import { useModal } from "../../context/Modal";
+import { Link } from "react-router-dom";
 import "./ApplicationDetailsModal.css";
 
 function ApplicationDetailsModal({ application }) {
   const { closeModal } = useModal();
   const { title, status, description, website_url: websiteUrl, company, cover_letters } = application;
-
   
   const statusLabels = {
     1: "Applied",
@@ -26,29 +26,22 @@ function ApplicationDetailsModal({ application }) {
           </p>
         )}
       </div>
-      
 
       {cover_letters && cover_letters.length > 0 && (
         <>
-        <h3>Cover Letters:</h3>
-        <ul className="cover-letters">
+          <h3>Cover Letters:</h3>
+          <ul className="cover-letters">
             {cover_letters.map((coverLetter) => (
               <li key={coverLetter.id}>
-                <a
-                  href={coverLetter.image?.file_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                {/* Link to the CoverLetterDetailPage */}
+                <Link to={`/coverletters/${coverLetter.id}`} onClick={closeModal}>
                   {coverLetter.title}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </>
-    
-       
       )}
-      
 
       <button className="close-button" onClick={closeModal}>
         Close
@@ -58,3 +51,5 @@ function ApplicationDetailsModal({ application }) {
 }
 
 export default ApplicationDetailsModal;
+
+

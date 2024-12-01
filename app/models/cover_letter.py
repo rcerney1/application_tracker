@@ -23,7 +23,9 @@ class CoverLetter(db.Model):
             "id": self.id,
             "title": self.title,
             "application_id": self.application_id,
+            "application_title": self.application.title if self.application else None,
             "user_id": self.user_id,
+            "image": self.image.to_dict() if self.image else None,
             "created_at": self.created_at,
             "updated_at": self.updated_at
         }

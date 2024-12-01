@@ -17,7 +17,7 @@ function ConfirmDeleteModal({ coverLetterId }) {
     return (
         <div className="delete-confirmation-modal">
             <h2 className="modal-title">Delete Cover Letter</h2>
-            <p className="'confirmation-message">
+            <p className="confirmation-message">
                 Are you sure you want to delete this cover letter?
             </p>
             <div className='modal-actions'>

@@ -12,6 +12,11 @@ function Navigation() {
     dispatch(thunkLogout());
   };
 
+  const handleProfileClick = (e) => {
+    e.preventDefault(); 
+    alert("Feature coming soon!");
+  };
+
   return (
     <div className="navigation-container">
       <div className="sidebar">
@@ -24,9 +29,9 @@ function Navigation() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/profile">
+              <a href="#" onClick={handleProfileClick}>
                 <FaUser /> Profile
-              </NavLink>
+              </a>
             </li>
             <li>
               <NavLink to="/mycoverletters">

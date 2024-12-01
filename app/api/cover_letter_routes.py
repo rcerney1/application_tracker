@@ -9,8 +9,20 @@ cover_letter_routes = Blueprint('cover_letters', __name__)
 @cover_letter_routes.route('/')
 @login_required
 def get_cover_letters():
-    cover_letters = CoverLetter.query.filter(CoverLetter.user_id == current_user.id).all()
-    return jsonify({'cover_letters': [cover_letter.to_dict() for cover_letter in cover_letters]})
+    page = request.args.get('page', 1, type=int)
+    limit = request.args.get('limit', 6, type=int)
+
+    query = CoverLetter.query.filter(CoverLetter.user_id == current_user.id)
+
+    total_count = query.count()
+    cover_letters = query.offset((page - 1) * limit).limit(limit).all()
+
+    return jsonify({
+        'cover_letters': [cover_letter.to_dict() for cover_letter in cover_letters],
+        'total_count': total_count,
+        'page': page,
+        'limit': limit
+    })
 
 
 # Get a cover letter by ID
@@ -35,7 +47,9 @@ def get_cover_letter(id):
 def create_cover_letter():
     form = CoverLetterForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
+        application_id = form.data['application_id']
         cover_letter = CoverLetter(
             title=form.data['title'],
             application_id=form.data.get('application_id'),
@@ -116,11 +130,24 @@ def update_cover_letter_image(id):
 
     form = CoverLetterImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
-        cover_letter.image.file_url = form.data['file_url']
+        # If the cover letter doesn't already have an image, create a new one
+        if not cover_letter.image:
+            new_image = CoverLetterImage(
+                cover_letter_id=cover_letter.id,
+                file_url=form.data['file_url']
+            )
+            db.session.add(new_image)
+        else:
+            # Update the existing image
+            cover_letter.image.file_url = form.data['file_url']
+
         db.session.commit()
         return jsonify(cover_letter.image.to_dict())
+
     return jsonify({'errors': form.errors}), 400
+
 
 
 # Delete the image from a cover letter

@@ -32,6 +32,7 @@ class Application(db.Model):
             "user_id": self.user_id,
             "company_id": self.company_id,
             "company": self.company.to_dict() if self.company else None,
+            "cover_letters": [cl.to_dict() for cl in self.cover_letters],
             "created_at": self.created_at,
             "updated_at": self.updated_at
         }

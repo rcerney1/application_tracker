@@ -1,0 +1,32 @@
+.cover-letter-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .cover-letter-detail-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .image-container {
+    margin-bottom: 20px;
+  }
+  
+  .cover-letter-image {
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+  }
+  
+  .metadata {
+    text-align: left;
+    margin-top: 20px;
+  }
+  
+  .metadata p {
+    margin: 10px 0;
+    font-size: 1rem;
+  }
+  

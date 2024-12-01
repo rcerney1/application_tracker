@@ -5,7 +5,7 @@ function CoverLetterCard({ coverLetter }) {
   const { id, title, image, application_title } = coverLetter;
 
   const handleCardClick = () => {
-    navigate(`/coverletters/${id}`); // Navigate to the detail page
+    navigate(`/coverletters/${id}`);
   };
 
   return (

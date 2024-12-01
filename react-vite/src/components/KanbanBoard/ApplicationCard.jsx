@@ -2,18 +2,17 @@ import { Draggable } from "@hello-pangea/dnd";
 import OpenModalButton from "../../components/OpenModalButton";
 import ApplicationDetailsModal from "../ApplicationDetails";
 import UpdateApplicationModal from "../UpdateApplicationModal";
-import { useDispatch } from "react-redux";
+import ConfirmDeleteModal from "../../components/ConfirmDeleteModal";
 import { thunkDeleteApplication } from "../../redux/application";
+import { useDispatch } from "react-redux";
 import "./KanbanBoard.css";
 
 function ApplicationCard({ application, index }) {
   const { id, title, company } = application;
   const dispatch = useDispatch();
 
-  const handleDelete = () => {
-    if (window.confirm("Are you sure you want to delete this application?")) {
-      dispatch(thunkDeleteApplication(id));
-    }
+  const handleDelete = async () => {
+    await dispatch(thunkDeleteApplication(id));
   };
 
   return (
@@ -31,14 +30,21 @@ function ApplicationCard({ application, index }) {
               buttonText={title}
             />
           </h3>
-          
           <p className="application-company">{company?.name || "No Company"}</p>
           <div className="card-actions">
             <OpenModalButton
               modalComponent={<UpdateApplicationModal application={application} />}
               buttonText="Update"
             />
-            <button onClick={handleDelete}>Delete</button>
+            <OpenModalButton
+              modalComponent={
+                <ConfirmDeleteModal
+                  onDelete={handleDelete}
+                  message="Are you sure you want to delete this application?"
+                />
+              }
+              buttonText="Delete"
+            />
           </div>
         </div>
       )}

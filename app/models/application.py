@@ -31,6 +31,7 @@ class Application(db.Model):
             "website_url": self.website_url,
             "user_id": self.user_id,
             "company_id": self.company_id,
+            "company": self.company.to_dict() if self.company else None,
             "created_at": self.created_at,
             "updated_at": self.updated_at
         }

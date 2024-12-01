@@ -22,7 +22,11 @@ def get_cover_letter(id):
         return jsonify({'errors': {'message': 'Cover letter not found'}}), 404
     if cover_letter.user_id != current_user.id:
         return jsonify({'errors': {'message': 'Unauthorized'}}), 401
-    return jsonify(cover_letter.to_dict())
+    cover_letter_data = cover_letter.to_dict()
+    if(cover_letter.image):
+        cover_letter_data['image'] = cover_letter.image.to_dict()
+
+    return jsonify(cover_letter_data)
 
 
 # Create a cover letter

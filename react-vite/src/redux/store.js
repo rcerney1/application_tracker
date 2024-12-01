@@ -6,9 +6,17 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
+import applicationsReducer from "./application";
+import coverLettersReducer from "./coverLetter";
+import coverLetterImagesReducer from "./coverLetterImage";
+import companiesReducer from "./company";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  applications: applicationsReducer,
+  coverLetters: coverLettersReducer,
+  coverLetterImages: coverLetterImagesReducer,
+  companies: companiesReducer,
 });
 
 let enhancer;

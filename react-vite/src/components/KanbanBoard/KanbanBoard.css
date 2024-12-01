@@ -1,0 +1,170 @@
+
+.kanban-board-container {
+    padding: 20px;
+    background-color: #f4f4f9;
+    width: 100%;
+}
+  
+.kanban-board-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+  
+.kanban-board {
+    display: flex;
+    gap: 20px;
+}
+  
+
+.kanban-column {
+    flex: 1;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+  
+.column-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+  
+.column-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    flex-grow: 1;
+}   
+ 
+.column-content {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+  
+.application-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    transition: box-shadow 0.2s, background-color 0.2s;
+    cursor: pointer;
+}
+  
+.application-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #e9f7ff;
+}
+  
+.application-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 5px;
+}
+  
+.application-company {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+}
+  
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+  
+.application-card button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.column-header button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.application-card button:hover {
+    background-color: #e0e0e0;
+}
+  
+/* Status Dropdown */
+.status-dropdown {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 14px;
+}
+  
+.status-dropdown label {
+    font-weight: bold;
+}
+  
+.status-dropdown select {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+}
+  
+.status-dropdown select:hover {
+    border-color: #bbb;
+}
+  
+.status-dropdown select:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+
+.application-title button {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+}
+
+.application-title button:hover {
+    text-decoration: none;
+    color: #0056b3;
+}
+
+.column-header button { /* Scope the add-button styles to column-header */
+    background-color: #f9f9f9;
+    border-radius: 8px; 
+    width: 100%; 
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block; 
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin: 0 auto; 
+}
+
+.column-header button:hover {
+    background-color: #e0e0e0;
+}

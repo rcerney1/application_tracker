@@ -36,7 +36,7 @@ def create_application():
             description=form.data.get('description'),
             website_url=form.data.get('website_url'),
             user_id=current_user.id,
-            company_id=form.data.get('company_id')
+            company_id=form.data.get('company_id') or None
         )
         db.session.add(application)
         db.session.commit()

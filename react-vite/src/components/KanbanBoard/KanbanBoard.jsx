@@ -12,7 +12,7 @@ function KanbanBoard() {
 
   const columns = [
     { title: "Applied", status: 1 },
-    { title: "Interview", status: 2 },
+    { title: "Interviews Scheduled", status: 2 },
     { title: "Offers", status: 3 },
     { title: "Rejected", status: 4 },
   ];

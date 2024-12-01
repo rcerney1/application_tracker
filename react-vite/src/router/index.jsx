@@ -3,6 +3,7 @@ import LoginFormPage from '../components/LoginFormPage';
 import Layout from './Layout';
 import HomePage from '../components/HomePage';
 import KanbanBoard from '../components/KanbanBoard';
+import MyCoverLetters from '../components/MyCoverLetters/MyCoverLetters';
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
         path: "/myjobtracker", 
         element: <KanbanBoard/>,
       },
+      {
+        path: "/mycoverletters",
+        element: <MyCoverLetters/>
+      }
     ],
   },
 ]);

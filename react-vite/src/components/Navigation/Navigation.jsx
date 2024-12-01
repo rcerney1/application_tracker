@@ -29,7 +29,7 @@ function Navigation() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/my_cover_letters">
+              <NavLink to="/mycoverletters">
                 <FaFileAlt /> My Cover Letters
               </NavLink>
             </li>

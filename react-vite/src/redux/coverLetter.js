@@ -34,11 +34,12 @@ const deleteCoverLetter = (coverLetterId) => ({
 // Thunks
 
 // Fetch all cover letters for the current user
-export const thunkFetchCoverLetters = () => async (dispatch) => {
-  const response = await fetch('/api/cover_letters/');
+export const thunkFetchCoverLetters = (page = 1, limit = 6) => async (dispatch) => {
+  const response = await fetch(`/api/cover_letters/?page=${page}&limit=${limit}`);
   if (response.ok) {
     const data = await response.json();
     dispatch(setCoverLetters(data.cover_letters));
+    return data;
   }
 };
 
@@ -61,6 +62,7 @@ export const thunkCreateCoverLetter = (coverLetterData) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(addCoverLetter(data));
+    return data;
   }
 };
 

@@ -1,5 +1,6 @@
 .application-details-modal {
     width: 100%;
+    width: 500px;
     max-width: 500px;
     margin: 0 auto;
     background-color: #fff;
@@ -36,7 +37,7 @@
     text-decoration: underline;
 }
 
-.btn-close {
+.close-button {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -48,7 +49,26 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.btn-close:hover {
+.close-button:hover {
     background-color: #0056b3;
     transform: translateY(-2px);
 }
+
+.cover-letters {
+    margin-top: 5px;
+    margin-left: 45px;
+}
+  
+.cover-letters li {
+    margin-bottom: 8px;
+}
+  
+.cover-letters a {
+    color: #007bff;
+    text-decoration: none;
+}
+  
+.cover-letters a:hover {
+    text-decoration: underline;
+}
+  

@@ -1,4 +1,3 @@
-import React from "react";
 import { Droppable } from "@hello-pangea/dnd";
 import ApplicationCard from "./ApplicationCard";
 import OpenModalButton from "../../components/OpenModalButton";
@@ -13,6 +12,7 @@ function KanbanColumn({ title, applications, status }) {
         <OpenModalButton
           modalComponent={<CreateApplicationModal status={status} />}
           buttonText="+ Create New"
+          className="add-button"
         />
       </div>
       <Droppable droppableId={`${status}`}>

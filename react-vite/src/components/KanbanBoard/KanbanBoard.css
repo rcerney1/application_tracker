@@ -30,7 +30,7 @@
   
 .column-header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     margin-bottom: 10px;
 }
@@ -39,28 +39,9 @@
     font-size: 18px;
     font-weight: bold;
     text-align: center;
+    margin-bottom: 10px;
     flex-grow: 1;
-}
-  
-.add-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease;
-}
-  
-.add-button:hover {
-    background-color: #0056b3;
-}
-  
+}   
  
 .column-content {
     min-height: 200px;
@@ -102,7 +83,15 @@
     margin-top: 10px;
 }
   
-button {
+.application-card button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.column-header button {
     padding: 5px 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -111,7 +100,7 @@ button {
     transition: background-color 0.3s ease;
 }
   
-button:hover {
+.application-card button:hover {
     background-color: #e0e0e0;
 }
   
@@ -161,4 +150,21 @@ button:hover {
 .application-title button:hover {
     text-decoration: none;
     color: #0056b3;
+}
+
+.column-header button { /* Scope the add-button styles to column-header */
+    background-color: #f9f9f9;
+    border-radius: 8px; 
+    width: 100%; 
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block; 
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin: 0 auto; 
+}
+
+.column-header button:hover {
+    background-color: #e0e0e0;
 }

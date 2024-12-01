@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkCreateApplication } from "../../redux/application";
 import { thunkFetchCompanies } from "../../redux/company";
@@ -51,7 +51,7 @@ function CreateApplicationModal({ status }) {
       <h2 className="modal-title">Create Application</h2>
       <form className="modal-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="title">Title</label>
+          <label>Title</label>
           <input
             id="title"
             type="text"
@@ -61,7 +61,7 @@ function CreateApplicationModal({ status }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="company">Company</label>
+          <label>Company</label>
           <select
             id="company"
             value={companyId}
@@ -78,7 +78,7 @@ function CreateApplicationModal({ status }) {
           {errors.companyId && <p className="error-message">{errors.companyId}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="status">Status</label>
+          <label>Status</label>
           <select
             id="status"
             value={statusValue}
@@ -91,7 +91,7 @@ function CreateApplicationModal({ status }) {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="description">Description</label>
+          <label>Description</label>
           <textarea
             id="description"
             value={description}
@@ -100,7 +100,7 @@ function CreateApplicationModal({ status }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="websiteUrl">Website URL</label>
+          <label>Website URL</label>
           <input
             id="websiteUrl"
             type="url"

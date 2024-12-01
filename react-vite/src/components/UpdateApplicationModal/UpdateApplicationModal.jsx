@@ -1,29 +1,37 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { thunkUpdateApplication } from "../../redux/application";
+import { thunkFetchCompanies } from "../../redux/company";
 import { useModal } from "../../context/Modal";
 import './UpdateApplicationModal.css'
 
 function UpdateApplicationModal({ application }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
+  const companies = useSelector((state) => state.companies);
 
   const [title, setTitle] = useState(application.title);
-  const [companyName, setCompanyName] = useState(application.company.name);
+  const [companyId, setCompanyId] = useState(application.company.id || "");
   const [statusValue, setStatusValue] = useState(application.status);
   const [description, setDescription] = useState(application.description || "");
   const [websiteUrl, setWebsiteUrl] = useState(application.website_url || "");
 
+  useEffect(() => {
+    dispatch(thunkFetchCompanies());
+  }, [dispatch]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const updatedData = {
       ...application,
       title,
-      companyName,
+      company_id: parseInt(companyId, 10), // Ensure proper ID format
       status: statusValue,
       description,
-      websiteUrl,
+      website_url: websiteUrl,
     };
+
     await dispatch(thunkUpdateApplication(application.id, updatedData));
     closeModal();
   };
@@ -33,7 +41,7 @@ function UpdateApplicationModal({ application }) {
       <h2 className="modal-title">Update Application</h2>
       <form className="modal-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="title">Title</label>
+          <label>Title</label>
           <input
             id="title"
             type="text"
@@ -43,17 +51,23 @@ function UpdateApplicationModal({ application }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="company">Company</label>
-          <input
+          <label>Company</label>
+          <select
             id="company"
-            type="text"
-            value={companyName}
-            onChange={(e) => setCompanyName(e.target.value)}
+            value={companyId}
+            onChange={(e) => setCompanyId(e.target.value)}
             required
-          />
+          >
+            <option value="">Select a company</option>
+            {companies.map((company) => (
+              <option key={company.id} value={company.id}>
+                {company.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="form-group">
-          <label htmlFor="status">Status</label>
+          <label>Status</label>
           <select
             id="status"
             value={statusValue}
@@ -66,7 +80,7 @@ function UpdateApplicationModal({ application }) {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="description">Description</label>
+          <label>Description</label>
           <textarea
             id="description"
             value={description}
@@ -75,7 +89,7 @@ function UpdateApplicationModal({ application }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="websiteUrl">Website URL</label>
+          <label>Website URL</label>
           <input
             id="websiteUrl"
             type="url"

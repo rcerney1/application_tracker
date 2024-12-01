@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { thunkLogin, thunkAuthenticate } from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
-import thunk from "redux-thunk";
+
 
 function LoginFormPage() {
   const navigate = useNavigate();

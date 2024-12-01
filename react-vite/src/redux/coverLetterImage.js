@@ -1,3 +1,5 @@
+
+
 // Action Types
 const ADD_COVER_LETTER_IMAGE = 'coverLetterImages/addCoverLetterImage';
 const UPDATE_COVER_LETTER_IMAGE = 'coverLetterImages/updateCoverLetterImage';
@@ -23,6 +25,7 @@ const deleteCoverLetterImage = (imageId) => ({
 // Thunks
 // Add an image to a cover letter
 export const thunkAddCoverLetterImage = (coverLetterId, imageData) => async (dispatch) => {
+  console.log('\n\nwe are creating things\n\n')
   const response = await fetch(`/api/cover_letters/${coverLetterId}/image`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

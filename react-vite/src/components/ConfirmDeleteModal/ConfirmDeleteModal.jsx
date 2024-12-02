@@ -1,9 +1,7 @@
-import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./ConfirmDeleteModal.css";
 
 function ConfirmDeleteModal({ onDelete, message = "Are you sure you want to delete this?" }) {
-  const dispatch = useDispatch();
   const { closeModal } = useModal();
 
   const handleDelete = async () => {

@@ -155,7 +155,6 @@ def update_cover_letter_image(id):
 @login_required
 def delete_cover_letter_image(id):
     cover_letter = CoverLetter.query.get(id)
-    print("\n\n", cover_letter.title, "\n\n")
     if not cover_letter:
         return jsonify({'errors': {'message': 'Cover letter not found'}}), 404
     if cover_letter.user_id != current_user.id:

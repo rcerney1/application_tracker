@@ -6,23 +6,23 @@ def seed_cover_letter_images():
     cover_letter_images = [
         CoverLetterImage(
             cover_letter_id=1,
-            file_url="https://example-bucket.s3.amazonaws.com/meta_cover_letter.pdf"
+            file_url="https://drive.google.com/file/d/1LyDZ7HdKkw0GRb4Kz1XEa50QtaW48Pwg/view"
         ),
         CoverLetterImage(
             cover_letter_id=2,
-            file_url="https://example-bucket.s3.amazonaws.com/google_cover_letter.pdf"
+            file_url="https://drive.google.com/file/d/1LyDZ7HdKkw0GRb4Kz1XEa50QtaW48Pwg/view"
         ),
         CoverLetterImage(
             cover_letter_id=3,
-            file_url="https://example-bucket.s3.amazonaws.com/amazon_cover_letter.pdf"
+            file_url="https://drive.google.com/file/d/1LyDZ7HdKkw0GRb4Kz1XEa50QtaW48Pwg/view"
         ),
         CoverLetterImage(
             cover_letter_id=4,
-            file_url="https://example-bucket.s3.amazonaws.com/netflix_cover_letter.pdf"
+            file_url="https://drive.google.com/file/d/1LyDZ7HdKkw0GRb4Kz1XEa50QtaW48Pwg/view"
         ),
         CoverLetterImage(
             cover_letter_id=5,
-            file_url="https://example-bucket.s3.amazonaws.com/apple_cover_letter.pdf"
+            file_url="https://drive.google.com/file/d/1LyDZ7HdKkw0GRb4Kz1XEa50QtaW48Pwg/view"
         ),
     ]
 

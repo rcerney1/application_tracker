@@ -50,7 +50,6 @@ function SignupFormPage() {
 
     if (serverResponse) {
       setErrors(serverResponse);
-      console.log("we have an error", errors, serverResponse)
     } else {
       navigate("/");
     }

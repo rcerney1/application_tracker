@@ -9,7 +9,6 @@ function CoverLetterCard({ coverLetter }) {
   };
 
   const isPdf = image?.file_url?.endsWith("/view"); 
-  console.log(image.file_url)
 
   return (
     <div className="cover-letter-card" onClick={handleCardClick}>

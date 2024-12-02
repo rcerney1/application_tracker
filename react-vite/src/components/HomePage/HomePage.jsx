@@ -14,7 +14,6 @@ function HomePage() {
   const sessionUser = useSelector(state => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  console.log(sessionUser.username)
 
   useEffect(() => {
     dispatch(thunkFetchApplicationSummary()).then(() => setIsLoaded(true));

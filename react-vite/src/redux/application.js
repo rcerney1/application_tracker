@@ -119,7 +119,6 @@ function applicationsReducer(state = initialState, action) {
     case ADD_APPLICATION:
       return { ...state, applications: [...state.applications, action.payload] };
     case UPDATE_APPLICATION:
-        console.log("Updating application in Redux:", action.payload);
       return {
         ...state,
         applications: state.applications.map((app) =>

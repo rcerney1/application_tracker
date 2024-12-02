@@ -35,6 +35,8 @@ const deleteCoverLetter = (coverLetterId) => ({
 
 // Fetch all cover letters for the current user
 export const thunkFetchCoverLetters = (page = 1, limit = 6) => async (dispatch) => {
+  dispatch(setCoverLetter([]));
+  
   const response = await fetch(`/api/cover_letters/?page=${page}&limit=${limit}`);
   if (response.ok) {
     const data = await response.json();
@@ -55,16 +57,33 @@ export const thunkFetchCoverLetterByID = (id) => async (dispatch) => {
 // Create a cover letter
 export const thunkCreateCoverLetter = (coverLetterData) => async (dispatch) => {
   const response = await fetch('/api/cover_letters/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(coverLetterData),
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(coverLetterData),
   });
   if (response.ok) {
-    const data = await response.json();
-    dispatch(addCoverLetter(data));
-    return data;
+      const data = await response.json();
+      let newCoverLetter = data;
+
+      // Add the image to the cover letter and update state
+      if (coverLetterData.imageData) {
+          const imageResponse = await fetch(`/api/cover_letters/${newCoverLetter.id}/image`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(coverLetterData.imageData),
+          });
+
+          if (imageResponse.ok) {
+              const imageData = await imageResponse.json();
+              newCoverLetter = { ...newCoverLetter, image: imageData };
+          }
+      }
+
+      dispatch(addCoverLetter(newCoverLetter));
+      return newCoverLetter;
   }
 };
+
 
 // Update a cover letter
 export const thunkUpdateCoverLetter = (id, coverLetterData) => async (dispatch) => {

@@ -5,7 +5,7 @@ function ConfirmDeleteModal({ onDelete, message = "Are you sure you want to dele
   const { closeModal } = useModal();
 
   const handleDelete = async () => {
-    await onDelete(); // Call the passed delete function
+    await onDelete();
     closeModal();
   };
 

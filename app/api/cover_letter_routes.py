@@ -12,7 +12,7 @@ def get_cover_letters():
     page = request.args.get('page', 1, type=int)
     limit = request.args.get('limit', 6, type=int)
 
-    query = CoverLetter.query.filter(CoverLetter.user_id == current_user.id)
+    query = CoverLetter.query.filter(CoverLetter.user_id == current_user.id).order_by(CoverLetter.created_at.desc())
 
     total_count = query.count()
     cover_letters = query.offset((page - 1) * limit).limit(limit).all()

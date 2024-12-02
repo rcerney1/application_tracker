@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import { thunkFetchCoverLetters } from "../../redux/coverLetter";
 import CoverLetterCard from "./CoverLetterCard";
 import OpenModalButton from "../../components/OpenModalButton";
@@ -10,23 +11,47 @@ function MyCoverLetters() {
     const dispatch = useDispatch();
     const coverLetters = useSelector((state) => state.coverLetters.coverLetters);
 
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const limit = 6; 
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const [pagination, setPagination] = useState({
+        page: parseInt(searchParams.get("page") || 1),
+        totalPages: 1,
+    });
+    const limit = 6;
+
+    useEffect(() => {
+        const queryPage = parseInt(searchParams.get("page") || 1);
+        setPagination((prev) => ({ ...prev, page: queryPage }));
+    }, [searchParams]);
 
     useEffect(() => {
         (async () => {
-            const data = await dispatch(thunkFetchCoverLetters(page, limit));
-            setTotalPages(Math.ceil(data.total_count / limit)); 
+            if (pagination.page === 1 && coverLetters.length > limit) {
+                await dispatch(thunkFetchCoverLetters(1, limit));
+            } else {
+                const data = await dispatch(thunkFetchCoverLetters(pagination.page, limit));
+                setPagination((prev) => ({
+                    ...prev,
+                    totalPages: Math.ceil(data.total_count / limit),
+                }));
+            }
         })();
-    }, [dispatch, page]);
+    }, [dispatch, pagination.page, coverLetters.length]);
 
     const handleNextPage = () => {
-        if (page < totalPages) setPage((prev) => prev + 1);
+        if (pagination.page < pagination.totalPages) {
+            const nextPage = pagination.page + 1;
+            setPagination((prev) => ({ ...prev, page: nextPage }));
+            setSearchParams({ page: nextPage });
+        }
     };
 
     const handlePreviousPage = () => {
-        if (page > 1) setPage((prev) => prev - 1);
+        if (pagination.page > 1) {
+            const prevPage = pagination.page - 1;
+            setPagination((prev) => ({ ...prev, page: prevPage }));
+            setSearchParams({ page: prevPage });
+        }
     };
 
     return (
@@ -52,17 +77,17 @@ function MyCoverLetters() {
                 <button
                     className="pagination-button"
                     onClick={handlePreviousPage}
-                    disabled={page === 1}
+                    disabled={pagination.page === 1}
                 >
                     Previous
                 </button>
                 <span className="page-indicator">
-                    Page {page} of {totalPages}
+                    Page {pagination.page} of {pagination.totalPages}
                 </span>
                 <button
                     className="pagination-button"
                     onClick={handleNextPage}
-                    disabled={page === totalPages}
+                    disabled={pagination.page === pagination.totalPages}
                 >
                     Next
                 </button>

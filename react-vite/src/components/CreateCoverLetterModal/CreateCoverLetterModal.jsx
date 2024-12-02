@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { thunkCreateCoverLetter } from '../../redux/coverLetter';
 import { thunkFetchApplications } from '../../redux/application';
-import { thunkAddCoverLetterImage } from '../../redux/coverLetterImage';
 import { useModal } from '../../context/Modal';
 import "./CreateCoverLetterModal.css";
 
 function CreateCoverLetterModal() {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
+    const navigate = useNavigate();
     const applications = useSelector((state) => state.applications.applications);
 
     const [title, setTitle] = useState("");
@@ -23,15 +24,9 @@ function CreateCoverLetterModal() {
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        const validationErrors = {}; 
-    
-        if (!title) {
-            validationErrors.title = "Title is required.";
-        }
-    
-        if (!fileUrl) {
-            validationErrors.fileUrl = "File URL is required.";
-        }
+        const validationErrors = {};
+        if (!title) validationErrors.title = "Title is required.";
+        if (!fileUrl) validationErrors.fileUrl = "File URL is required.";
     
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
@@ -41,23 +36,21 @@ function CreateCoverLetterModal() {
         const coverLetterData = {
             title,
             application_id: applicationId ? parseInt(applicationId, 10) : null,
+            imageData: { file_url: fileUrl },
         };
     
         try {
             const newCoverLetter = await dispatch(thunkCreateCoverLetter(coverLetterData));
-    
-            
-            if (newCoverLetter && newCoverLetter.id) {
-                const imagePayload = { file_url: fileUrl };
-                await dispatch(thunkAddCoverLetterImage(newCoverLetter.id, imagePayload));
+            if(newCoverLetter){
+                navigate('/mycoverletters?page=1');
             }
-    
             closeModal();
-            window.location.reload();
         } catch (error) {
-            console.error("Failed to create cover letter or add image:", error);
+            console.error("Failed to create cover letter:", error);
         }
+        closeModal();
     };
+    
 
     return (
         <div className="create-cover-letter-modal">

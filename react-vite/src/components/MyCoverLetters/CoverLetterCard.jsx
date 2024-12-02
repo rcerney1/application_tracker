@@ -8,11 +8,20 @@ function CoverLetterCard({ coverLetter }) {
     navigate(`/coverletters/${id}`);
   };
 
+  const isPdf = image?.file_url?.endsWith("/view"); 
+  console.log(image.file_url)
+
   return (
     <div className="cover-letter-card" onClick={handleCardClick}>
       <div className="cover-letter-image-container">
-        {image && image.file_url ? (
-          <img src={image.file_url} alt={`Cover Letter for ${title}`} className="cover-letter-image" />
+        {image && !isPdf ? (
+          <img
+            src={image.file_url}
+            alt={`Cover Letter for ${title}`}
+            className="cover-letter-image"
+          />
+        ) : isPdf ? (
+          <div className="placeholder-image">PDF File</div>
         ) : (
           <div className="placeholder-image">No Image</div>
         )}

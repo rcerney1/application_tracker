@@ -51,4 +51,31 @@
     background-color: #656565;
     color: white;
 }
+
+
+.pdf-container {
+    text-align: center;
+    margin: 20px 0;
+}
+  
+.view-pdf-button {
+    padding: 10px 20px;
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+  
+.view-pdf-button:hover {
+    background-color: #0056b3;
+}
+  
+.view-pdf-button:active {
+    transform: translateY(2px);
+}
+  
   

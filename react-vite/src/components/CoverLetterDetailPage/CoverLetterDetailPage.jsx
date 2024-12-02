@@ -9,37 +9,50 @@ import "./CoverLetterDetailPage.css";
 
 function CoverLetterDetailPage() {
   const dispatch = useDispatch();
-  const { id } = useParams(); // Get cover letter ID from URL
+  const { id } = useParams();
   const coverLetter = useSelector((state) => state.coverLetters.coverLetter);
 
   useEffect(() => {
-    dispatch(thunkFetchCoverLetterByID(id)); // Fetch the cover letter details
+    dispatch(thunkFetchCoverLetterByID(id));
   }, [dispatch, id]);
 
   if (!coverLetter) {
-    return <div>Loading...</div>; // Show a loading message while fetching
+    return <div>Loading...</div>;
   }
 
   const { title, application_title, image, created_at, updated_at } = coverLetter;
 
   const handleDelete = async () => {
     await dispatch(thunkDeleteCoverLetter(id));
-    // Optionally redirect back to MyCoverLetters after deletion
     window.location.href = "/mycoverletters";
   };
+
+  const isPdf = image?.file_url?.endsWith("/view");
 
   return (
     <div className="cover-letter-detail-container">
       <h1>{title}</h1>
       {image ? (
-        <div className="image-container">
-          <img
-            src={image.file_url}
-            alt={`Cover Letter for ${title}`}
-            className="cover-letter-image"
-            onClick={() => window.open(image.file_url, "_blank", "noopener,noreferrer")}
-          />
-        </div>
+        isPdf ? (
+          <div className="pdf-container">
+            <p>This is a PDF file.</p>
+            <button
+              className="view-pdf-button"
+              onClick={() => window.open(image.file_url, "_blank", "noopener,noreferrer")}
+            >
+              View PDF
+            </button>
+          </div>
+        ) : (
+          <div className="image-container">
+            <img
+              src={image.file_url}
+              alt={`Cover Letter for ${title}`}
+              className="cover-letter-image"
+              onClick={() => window.open(image.file_url, "_blank", "noopener,noreferrer")}
+            />
+          </div>
+        )
       ) : (
         <p>No image available</p>
       )}
